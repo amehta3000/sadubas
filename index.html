@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SADUBAS — The Sadhus of Bass. Bollywood psychedelia from Los Angeles. Tabla, beat machines, and Golden Era Bollywood samples since 1999.">
+  <meta property="og:title" content="SADUBAS — The Sadhus of Bass">
+  <meta property="og:description" content="Bollywood psychedelia · Trip Hop · Cinematic South Asia · Los Angeles">
+  <meta property="og:type" content="website">
+  <title>SADUBAS — The Sadhus of Bass</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & TOKENS
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:      #060505;
+      --dark:       #0d0a08;
+      --surface:    #161210;
+      --surface2:   #1e1814;
+      --gold:       #C8882A;
+      --gold-lt:    #E8A93A;
+      --gold-dim:   #6e4f1c;
+      --red:        #9B1B1B;
+      --red-br:     #C43030;
+      --teal:       #0BC4D4;
+      --cream:      #EDE4D0;
+      --cream-dim:  #8a7a5e;
+      --white:      #FBF7EC;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Film grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9999;
+      animation: grain 0.4s steps(1) infinite;
+    }
+
+    @keyframes grain {
+      0%   { transform: translate(0,0); }
+      20%  { transform: translate(-2%,-3%); }
+      40%  { transform: translate(3%,2%); }
+      60%  { transform: translate(-1%,3%); }
+      80%  { transform: translate(2%,-2%); }
+      100% { transform: translate(-3%,1%); }
+    }
+
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.03em; line-height: 0.95; }
+
+    .label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1.4rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, padding 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(6,5,5,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.9rem 2.5rem;
+      border-bottom-color: rgba(200,136,42,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 201;
+    }
+    .nav-burger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--cream);
+      transition: all 0.3s;
+      transform-origin: center;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      .nav-burger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: var(--black);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        z-index: 200;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.1rem; letter-spacing: 0.4em; }
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      text-align: left;
+      padding: 7rem 2rem 6rem;
+      padding-left: clamp(2rem, 6vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        align-items: center;
+        text-align: center;
+        padding-left: 2rem;
+      }
+      .hero-actions { justify-content: center; }
+    }
+
+    /* Hero photo background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(6,5,5,0.2) 0%, rgba(6,5,5,0.05) 25%, rgba(6,5,5,0.15) 55%, rgba(6,5,5,0.88) 100%),
+        linear-gradient(to right, rgba(6,5,5,0.7) 0%, rgba(6,5,5,0.0) 40%, rgba(6,5,5,0.0) 60%, rgba(6,5,5,0.5) 100%),
+        url('images/hero-banner.png') center 30% / cover no-repeat;
+    }
+
+    /* Scanlines */
+    .hero-scan {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,0.04) 3px,
+        rgba(0,0,0,0.04) 4px
+      );
+      pointer-events: none;
+    }
+
+    /* Concentric decorative rings */
+    .hero-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(200,136,42,0.05);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+    }
+    .hero-ring:nth-child(1) { width: 500px; height: 500px; animation: spin 40s linear infinite; }
+    .hero-ring:nth-child(2) { width: 800px; height: 800px; border-color: rgba(155,27,27,0.04); animation: spin 60s linear infinite reverse; }
+    .hero-ring:nth-child(3) { width: 1100px; height: 1100px; border-color: rgba(200,136,42,0.03); animation: spin 80s linear infinite; }
+    .hero-ring:nth-child(4) { width: 1500px; height: 1500px; border-color: rgba(155,27,27,0.02); animation: spin 100s linear infinite reverse; }
+
+    @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    /* Diagonal accent stripes */
+    .hero-stripe {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 80px,
+        rgba(200,136,42,0.015) 80px,
+        rgba(200,136,42,0.015) 82px
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 35px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+      opacity: 0.6;
+    }
+    .hero-eyebrow::after { background: linear-gradient(90deg, var(--gold), transparent); }
+    .hero-eyebrow { text-shadow: 0 2px 12px rgba(0,0,0,0.7); }
+
+    .hero-title {
+      font-size: clamp(5.5rem, 22vw, 20rem);
+      line-height: 0.82;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+      text-shadow: 0 4px 40px rgba(0,0,0,0.6), 0 0 120px rgba(200,136,42,0.12);
+    }
+
+    .hero-subtitle {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(0.7rem, 1.8vw, 1rem);
+      font-weight: 600;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-top: 1rem;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.7);
+    }
+
+    .hero-tagline {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(0.95rem, 2.5vw, 1.3rem);
+      color: var(--red-br);
+      margin-bottom: 3rem;
+      opacity: 0.9;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.2rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.22s;
+      border: none;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--black);
+    }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,136,42,0.3); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      outline: 1px solid rgba(237,228,208,0.25);
+      outline-offset: 0;
+    }
+    .btn-ghost:hover { outline-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--cream-dim);
+      font-size: 0.55rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      animation: float 2.5s ease-in-out infinite;
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ============================================================
+       MARQUEE TICKER
+    ============================================================ */
+    .ticker {
+      overflow: hidden;
+      background: var(--red);
+      padding: 0.6rem 0;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      gap: 0;
+      animation: ticker 20s linear infinite;
+    }
+
+    .ticker-item {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(254,251,240,0.9);
+      padding: 0 2.5rem;
+    }
+
+    .ticker-item::after {
+      content: '✦';
+      margin-left: 2.5rem;
+      opacity: 0.5;
+    }
+
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ============================================================
+       SHARED SECTION STYLES
+    ============================================================ */
+    section { padding: 7rem 2rem; }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .sh { /* section header */
+      margin-bottom: 4rem;
+    }
+
+    .sh .label { display: block; margin-bottom: 0.8rem; }
+
+    .section-title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: var(--cream);
+    }
+    .section-title .gold { color: var(--gold); }
+    .section-title .red  { color: var(--red-br); }
+
+    .rule {
+      width: 50px;
+      height: 3px;
+      background: var(--red);
+      margin-top: 1.5rem;
+    }
+
+    .deco-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(200,136,42,0.25) 30%, rgba(200,136,42,0.25) 70%, transparent 100%);
+    }
+
+    .stripe-bar {
+      height: 5px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold) 0px, var(--gold) 12px,
+        var(--red)  12px, var(--red) 24px,
+        var(--black) 24px, var(--black) 28px
+      );
+      opacity: 0.7;
+    }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    .about { background: var(--dark); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--cream-dim);
+      margin-bottom: 1.4rem;
+    }
+    .about-text p strong { color: var(--cream); font-weight: 700; }
+
+    .members {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .member {
+      flex: 1;
+      padding: 1.4rem;
+      background: var(--surface);
+      border-left: 3px solid var(--gold);
+      position: relative;
+    }
+
+    .member::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, transparent 50%, rgba(200,136,42,0.08) 50%);
+    }
+
+    .member-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+    .member-role {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--cream-dim);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* SVG Mandala / Medallion */
+    .medallion {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .medallion svg { width: 100%; max-width: 380px; }
+
+    /* ============================================================
+       VIDEOS
+    ============================================================ */
+    .videos { background: var(--black); }
+
+    .video-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .video-main { position: relative; }
+
+    .video-embed-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .video-embed-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-embed-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 0 1px rgba(200,136,42,0.15);
+      pointer-events: none;
+    }
+
+    .video-info {
+      margin-top: 1.2rem;
+      padding-left: 1.2rem;
+      border-left: 3px solid var(--gold);
+    }
+    .video-info h3 {
+      font-size: 1.6rem;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+    .video-info p { font-size: 0.75rem; letter-spacing: 0.15em; color: var(--cream-dim); text-transform: uppercase; }
+
+    .video-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-top: 0.5rem;
+    }
+
+    .video-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--surface);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-thumb-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(6,5,5,0.9), transparent);
+    }
+    .video-thumb-label h4 {
+      font-size: 1rem;
+      color: var(--cream);
+      font-family: 'Bebas Neue', sans-serif;
+    }
+    .video-thumb-label span {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--cream-dim);
+      text-transform: uppercase;
+    }
+    .video-coming {
+      text-align: center;
+      color: var(--gold-dim);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 2rem;
+      border: 1px dashed rgba(200,136,42,0.15);
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+    }
+
+    @media (max-width: 860px) {
+      .video-row { grid-template-columns: 1fr; }
+      .video-side { flex-direction: row; }
+      .video-coming { min-height: 80px; }
+    }
+    @media (max-width: 560px) {
+      .video-side { flex-direction: column; }
+    }
+
+    /* ============================================================
+       SHOWS
+    ============================================================ */
+    .shows { background: var(--dark); }
+
+    .show-list { list-style: none; }
+
+    .show-item {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(237,228,208,0.07);
+      transition: background 0.2s;
+    }
+    .show-item:first-child { border-top: 1px solid rgba(237,228,208,0.07); }
+    .show-item:hover { background: rgba(200,136,42,0.025); }
+
+    .show-date-block { text-align: center; }
+    .show-day {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--gold);
+    }
+    .show-month {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+    }
+
+    .show-body h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+    .show-venue {
+      font-size: 0.78rem;
+      color: var(--cream-dim);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
+    }
+    .show-loc {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .show-link {
+      display: inline-flex;
+      padding: 0.6rem 1.3rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .show-link.tickets { color: var(--gold); border-color: rgba(200,136,42,0.35); }
+    .show-link.tickets:hover { background: var(--gold); color: var(--black); }
+    .show-link.free { color: var(--teal); border-color: rgba(11,196,212,0.3); }
+    .show-link.free:hover { background: var(--teal); color: var(--black); }
+
+    @media (max-width: 620px) {
+      .show-item { grid-template-columns: 70px 1fr; }
+      .show-link { grid-column: 2; width: fit-content; margin-top: 0.5rem; }
+    }
+
+    /* ============================================================
+       GALLERY
+    ============================================================ */
+    .gallery { background: var(--black); }
+
+    .gallery-note {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--cream-dim);
+      margin-top: -3rem;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.4rem;
+    }
+
+    .gi { position: relative; overflow: hidden; background: var(--surface); }
+    .gi:nth-child(1) { grid-column: span 7; aspect-ratio: 3/2; }
+    .gi:nth-child(2) { grid-column: span 5; aspect-ratio: 4/3; }
+    .gi:nth-child(3) { grid-column: span 5; aspect-ratio: 4/3; }
+    .gi:nth-child(4) { grid-column: span 4; aspect-ratio: 1; }
+    .gi:nth-child(5) { grid-column: span 4; aspect-ratio: 1; }
+    .gi:nth-child(6) { grid-column: span 4; aspect-ratio: 1; }
+
+    .gi img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.3s;
+      filter: saturate(0.75) contrast(1.1) brightness(0.95);
+    }
+    .gi:hover img {
+      transform: scale(1.05);
+      filter: saturate(1.1) contrast(1.05) brightness(1);
+    }
+
+    /* Color-coded placeholder cells */
+    .gi-placeholder {
+      width: 100%; height: 100%; min-height: 180px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.75rem;
+      background: var(--surface2);
+      border: 1px dashed rgba(200,136,42,0.12);
+      color: var(--gold-dim);
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .gi-placeholder:hover { border-color: rgba(200,136,42,0.35); color: var(--gold); background: rgba(200,136,42,0.04); }
+    .gi-placeholder::before { content: '+'; font-size: 1.5rem; font-weight: 300; opacity: 0.4; }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+      .gi:nth-child(n) { grid-column: span 1; aspect-ratio: 1; }
+      .gi:nth-child(1) { grid-column: span 2; aspect-ratio: 16/9; }
+    }
+
+    /* ============================================================
+       CONNECT / SOCIAL
+    ============================================================ */
+    .connect { background: var(--dark); text-align: center; }
+
+    .connect .container { max-width: 860px; }
+
+    .connect-lead {
+      font-size: 1.05rem;
+      color: var(--cream-dim);
+      max-width: 480px;
+      margin: 1.5rem auto 0;
+      line-height: 1.8;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.8rem;
+      margin-top: 3rem;
+    }
+
+    .social-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 2rem 1rem;
+      background: var(--surface);
+      border: 1px solid transparent;
+      text-decoration: none;
+      color: var(--cream-dim);
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .social-tile::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+    .social-tile:hover { border-color: rgba(200,136,42,0.2); color: var(--gold); background: rgba(200,136,42,0.04); transform: translateY(-4px); }
+    .social-tile:hover::before { transform: scaleX(1); }
+
+    .social-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      transition: transform 0.25s;
+    }
+    .social-tile:hover .social-icon { transform: scale(1.15); }
+
+    .social-name {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       BOOKING
+    ============================================================ */
+    .booking {
+      background: var(--surface);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .booking-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .booking p {
+      font-size: 1rem;
+      color: var(--cream-dim);
+      line-height: 1.8;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .booking a.btn { display: inline-flex; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--black);
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(200,136,42,0.1);
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      color: var(--cream-dim);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      list-style: none;
+    }
+    .footer-nav a {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      color: rgba(154,138,104,0.35);
+    }
+
+    /* ============================================================
+       SHOW HISTORY
+    ============================================================ */
+    .history { background: var(--black); padding: 5rem 2rem; }
+
+    .history-cols {
+      column-count: 2;
+      column-gap: 4rem;
+    }
+
+    .year-group {
+      break-inside: avoid;
+      margin-bottom: 2rem;
+    }
+
+    .year-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(200,136,42,0.2);
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .history-item {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0.28rem 0;
+      border-bottom: 1px solid rgba(237,228,208,0.04);
+      align-items: baseline;
+    }
+
+    .h-date {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--gold-dim);
+      white-space: nowrap;
+      min-width: 46px;
+      flex-shrink: 0;
+    }
+
+    .h-body { min-width: 0; }
+
+    .h-event {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+    }
+
+    .h-venue {
+      font-size: 0.6rem;
+      color: var(--cream-dim);
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 768px) {
+      .history-cols { column-count: 1; }
+    }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .medallion { display: none; }
+      section { padding: 5rem 1.5rem; }
+    }
+
+    /* Highlight bar on ::selection */
+    ::selection { background: rgba(200,136,42,0.3); color: var(--cream); }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav id="nav">
+  <a href="#home" class="nav-logo">SADUBAS</a>
+  <button class="nav-burger" id="burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#history">History</a></li>
+    <li><a href="#gallery">Photos</a></li>
+    <li><a href="#connect">Listen</a></li>
+    <li><a href="#booking">Booking</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Los Angeles &nbsp;·&nbsp; Since 1999</div>
+    <h1 class="hero-title">SADUBAS</h1>
+    <p class="hero-subtitle">The Sadhus of Bass</p>
+    <p class="hero-tagline">Bollywood Psychedelia &nbsp;·&nbsp; Tabla &nbsp;·&nbsp; Beat Machines &nbsp;·&nbsp; Golden Era</p>
+    <div class="hero-actions">
+      <a href="#shows" class="btn btn-gold">Upcoming Shows</a>
+      <a href="#videos" class="btn btn-ghost">Watch &amp; Listen</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ============================================================
+     TICKER
+============================================================ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Bollywood Psychedelia</span>
+    <span class="ticker-item">Golden Era Samples</span>
+    <span class="ticker-item">Tabla &amp; Beat Machines</span>
+    <span class="ticker-item">Cinematic South Asia</span>
+    <span class="ticker-item">Trip Hop</span>
+    <span class="ticker-item">Cosmic Transmissions</span>
+    <span class="ticker-item">Retro Futures</span>
+    <span class="ticker-item">Los Angeles</span>
+    <span class="ticker-item">Bollywood Psychedelia</span>
+    <span class="ticker-item">Golden Era Samples</span>
+    <span class="ticker-item">Tabla &amp; Beat Machines</span>
+    <span class="ticker-item">Cinematic South Asia</span>
+    <span class="ticker-item">Trip Hop</span>
+    <span class="ticker-item">Cosmic Transmissions</span>
+    <span class="ticker-item">Retro Futures</span>
+    <span class="ticker-item">Los Angeles</span>
+  </div>
+</div>
+
+<div class="deco-line"></div>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-text">
+        <div class="reveal">
+          <span class="label">About</span>
+          <h2 class="section-title">The Sound<br>of <span class="gold">Somewhere</span><br>Else</h2>
+          <div class="rule"></div>
+        </div>
+
+        <div class="reveal d1">
+          <p style="margin-top:2rem;">
+            <strong>SADUBAS</strong> are Ameet Mehta and Robin Sukhadia — childhood friends
+            conjuring sonic hallucinations with tabla, beat machines, and Golden Era
+            Bollywood samples since 1999.
+          </p>
+          <p>
+            Their music converges <strong>classical Indian rhythms</strong> with 70s Bollywood
+            vibes to create psychedelic soundscapes that are one part trip hop and two parts
+            cinematic South Asia — the soundtrack to a film that was never made, a world
+            that almost was.
+          </p>
+          <p>
+            Performed at <strong>The Academy Museum of Motion Pictures</strong>, LACMA,
+            the Hammer Museum, and the Bowers Museum.
+          </p>
+        </div>
+
+        <div class="members reveal d2">
+          <div class="member">
+            <div class="member-name">Ameet Mehta</div>
+            <div class="member-role">Electronic Production · Beats</div>
+          </div>
+          <div class="member">
+            <div class="member-name">Robin Sukhadia</div>
+            <div class="member-role">Tabla · Classical Percussion</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG Medallion -->
+      <div class="medallion reveal d3" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer rings -->
+          <circle cx="200" cy="200" r="190" stroke="#D4940A" stroke-width="0.5" stroke-dasharray="3 9" opacity="0.4"/>
+          <circle cx="200" cy="200" r="165" stroke="#B5271A" stroke-width="0.5" stroke-dasharray="2 7" opacity="0.3"/>
+          <circle cx="200" cy="200" r="140" stroke="#D4940A" stroke-width="1" opacity="0.15"/>
+          <circle cx="200" cy="200" r="115" stroke="#D4940A" stroke-width="0.5" opacity="0.2"/>
+          <!-- Axis lines -->
+          <line x1="200" y1="10" x2="200" y2="390" stroke="#D4940A" stroke-width="0.4" opacity="0.15"/>
+          <line x1="10" y1="200" x2="390" y2="200" stroke="#D4940A" stroke-width="0.4" opacity="0.15"/>
+          <line x1="66" y1="66" x2="334" y2="334" stroke="#D4940A" stroke-width="0.4" opacity="0.15"/>
+          <line x1="334" y1="66" x2="66" y2="334" stroke="#D4940A" stroke-width="0.4" opacity="0.15"/>
+          <!-- Cardinal dots -->
+          <circle cx="200" cy="10" r="4" fill="#D4940A" opacity="0.6"/>
+          <circle cx="200" cy="390" r="4" fill="#D4940A" opacity="0.6"/>
+          <circle cx="10" cy="200" r="4" fill="#D4940A" opacity="0.6"/>
+          <circle cx="390" cy="200" r="4" fill="#D4940A" opacity="0.6"/>
+          <circle cx="66" cy="66" r="3" fill="#B5271A" opacity="0.6"/>
+          <circle cx="334" cy="334" r="3" fill="#B5271A" opacity="0.6"/>
+          <circle cx="334" cy="66" r="3" fill="#B5271A" opacity="0.6"/>
+          <circle cx="66" cy="334" r="3" fill="#B5271A" opacity="0.6"/>
+          <!-- Inner petals (lotus-like) -->
+          <path d="M200 85 C220 130 220 170 200 200 C180 170 180 130 200 85Z" fill="#D4940A" opacity="0.06"/>
+          <path d="M315 200 C270 220 230 220 200 200 C230 180 270 180 315 200Z" fill="#D4940A" opacity="0.06"/>
+          <path d="M200 315 C180 270 180 230 200 200 C220 230 220 270 200 315Z" fill="#D4940A" opacity="0.06"/>
+          <path d="M85 200 C130 180 170 180 200 200 C170 220 130 220 85 200Z" fill="#D4940A" opacity="0.06"/>
+          <!-- Center text -->
+          <text x="200" y="190" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="52" fill="#D4940A" opacity="0.9" letter-spacing="4">SADU</text>
+          <text x="200" y="234" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="52" fill="#B5271A" opacity="0.9" letter-spacing="4">BAS</text>
+          <text x="200" y="260" text-anchor="middle" font-family="'Rajdhani', sans-serif" font-size="10" fill="#9a8a68" letter-spacing="6" font-weight="700">THE SADHUS OF BASS</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="stripe-bar"></div>
+
+<!-- ============================================================
+     VIDEOS
+============================================================ -->
+<section class="videos" id="videos">
+  <div class="container">
+    <div class="sh reveal">
+      <span class="label">Watch</span>
+      <h2 class="section-title">Music <span class="gold">Videos</span></h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="video-row">
+      <!-- Primary video -->
+      <div class="video-main reveal d1">
+        <div class="video-embed-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/80jMBDo9gDk?rel=0&color=white&modestbranding=1"
+            title="RAILWAYS by SADUBAS — Cinematic Cut"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="video-info">
+          <h3>Railways</h3>
+          <p>Cinematic Cut &nbsp;·&nbsp; 2024 &nbsp;·&nbsp; 4:20</p>
+        </div>
+      </div>
+
+      <!-- Side panel -->
+      <div class="video-side reveal d2">
+        <div style="padding: 1.5rem; background: var(--surface); border-left: 3px solid var(--red);">
+          <p style="font-family:'DM Serif Display',serif; font-style:italic; font-size:1.15rem; color:var(--cream); line-height:1.6; margin-bottom: 1rem;">
+            "The Barddhaman Local departs Howrah Station at 5:30am, taking its passengers deep into the West Bengal countryside."
+          </p>
+          <p style="font-size:0.65rem; letter-spacing:0.2em; color:var(--cream-dim); text-transform:uppercase;">Premiered · 3rd i Film Festival · San Francisco · Oct 2024</p>
+          <p style="font-size:0.65rem; letter-spacing:0.2em; color:var(--cream-dim); text-transform:uppercase; margin-top:0.4rem;">Cinematography · Rusha Bose</p>
+        </div>
+
+        <div class="video-coming">More Videos · Coming Soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="deco-line"></div>
+
+<!-- ============================================================
+     SHOWS
+============================================================ -->
+<section class="shows" id="shows">
+  <div class="container">
+    <div class="sh reveal">
+      <span class="label">Live</span>
+      <h2 class="section-title">Upcoming <span class="gold">Shows</span></h2>
+      <div class="rule"></div>
+    </div>
+
+    <ul class="show-list">
+      <li class="show-item reveal d1">
+        <div class="show-date-block">
+          <div class="show-day">03</div>
+          <div class="show-month">May 2025</div>
+        </div>
+        <div class="show-body">
+          <h3>Echoes of Diplomacy: India's Sonic Footprint in the Cold War Era</h3>
+          <div class="show-venue">The Wende Museum · Glorya Kaufman Community Center</div>
+          <div class="show-loc">Culver City, CA &nbsp;·&nbsp; 3:00 PM &nbsp;·&nbsp; Free Admission</div>
+        </div>
+        <a href="https://eventvesta.com/events/103126/t/tickets" target="_blank" rel="noopener" class="show-link free">RSVP Free</a>
+      </li>
+
+      <li class="show-item reveal d2" style="opacity: 0.45;">
+        <div class="show-date-block">
+          <div class="show-day">TBA</div>
+          <div class="show-month">2025</div>
+        </div>
+        <div class="show-body">
+          <h3>More Shows Coming Soon</h3>
+          <div class="show-venue">Follow SADUBAS for announcements</div>
+          <div class="show-loc">Los Angeles, CA</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="deco-line"></div>
+
+<!-- ============================================================
+     SHOW HISTORY
+============================================================ -->
+<section class="history" id="history">
+  <div class="container">
+    <div class="sh reveal">
+      <span class="label">Since 2008</span>
+      <h2 class="section-title" style="font-size: clamp(2rem,6vw,4rem);">Show <span class="gold">History</span></h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="history-cols reveal d1">
+
+      <div class="year-group">
+        <div class="year-label">2026</div>
+        <div class="history-item">
+          <div class="h-date">Mar 7</div>
+          <div class="h-body"><span class="h-event">Bowers Museum — CHINTZ</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Jan 4</div>
+          <div class="h-body"><span class="h-event">Bowers Museum</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2025</div>
+        <div class="history-item">
+          <div class="h-date">Oct 18</div>
+          <div class="h-body"><span class="h-event">Culver Artwalk</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Oct 4</div>
+          <div class="h-body"><span class="h-event">Ektaa Diwali</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Sep 25</div>
+          <div class="h-body"><span class="h-event">Rockwell Birthday</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 3</div>
+          <div class="h-body"><span class="h-event">Wende Museum</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Mar 28</div>
+          <div class="h-body"><span class="h-event">Kaya Press</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2024</div>
+        <div class="history-item">
+          <div class="h-date">Aug 15</div>
+          <div class="h-body"><span class="h-event">Culver City Steps</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Jul 14</div>
+          <div class="h-body"><span class="h-event">Bowers Museum</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 18</div>
+          <div class="h-body"><span class="h-event">Academy Museum of Motion Pictures</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 2</div>
+          <div class="h-body"><span class="h-event">Dublab</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2023</div>
+        <div class="history-item">
+          <div class="h-date">Dec 8</div>
+          <div class="h-body"><span class="h-event">Xmas Party</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Nov 30</div>
+          <div class="h-body"><span class="h-event">Dublab</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Nov 5</div>
+          <div class="h-body"><span class="h-event">Mar Vista Diwali Festival</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Oct 14</div>
+          <div class="h-body"><span class="h-event">Culver City Arts Walk</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Sep 9</div>
+          <div class="h-body"><span class="h-event">Saviant Party</span> <span class="h-venue">· Inner City Arts</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Jul 16</div>
+          <div class="h-body"><span class="h-event">Bowers Museum</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 28</div>
+          <div class="h-body"><span class="h-event">Kali Mandir</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 6</div>
+          <div class="h-body"><span class="h-event">Shaara Raathri</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2022</div>
+        <div class="history-item">
+          <div class="h-date">Oct 9</div>
+          <div class="h-body"><span class="h-event">Grand Park</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Oct 8</div>
+          <div class="h-body"><span class="h-event">Culver Artwalk</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2021</div>
+        <div class="history-item">
+          <div class="h-date">Oct 9</div>
+          <div class="h-body"><span class="h-event">Culver Artwalk</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2020</div>
+        <div class="history-item">
+          <div class="h-date">Mar 21</div>
+          <div class="h-body"><span class="h-event">REDCAT Gala</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Feb 11</div>
+          <div class="h-body"><span class="h-event">CalArts 50+50 Art Opening</span> <span class="h-venue">· REDCAT</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2019</div>
+        <div class="history-item">
+          <div class="h-date">Nov 24</div>
+          <div class="h-body"><span class="h-event">Private Event</span> <span class="h-venue">· Los Feliz</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Oct 12</div>
+          <div class="h-body"><span class="h-event">Culver City Art Walk</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Oct 11</div>
+          <div class="h-body"><span class="h-event">CalArts Welcome Weekend</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Oct 6</div>
+          <div class="h-body"><span class="h-event">Bowers Museum</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Jan 6</div>
+          <div class="h-body"><span class="h-event">Bowers Museum</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2018</div>
+        <div class="history-item">
+          <div class="h-date">Oct 6</div>
+          <div class="h-body"><span class="h-event">Culver City Art Walk</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 20</div>
+          <div class="h-body"><span class="h-event">LA Times Food Bowl</span> <span class="h-venue">· Downtown LA</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 7</div>
+          <div class="h-body"><span class="h-event">CalArts Graduation</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Apr 15</div>
+          <div class="h-body"><span class="h-event">Indian Film Festival</span> <span class="h-venue">· IFFLA, Los Angeles</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Feb 4</div>
+          <div class="h-body"><span class="h-event">Vivek</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Jan 7</div>
+          <div class="h-body"><span class="h-event">Bowers Museum</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2017</div>
+        <div class="history-item">
+          <div class="h-date">Oct 13</div>
+          <div class="h-body"><span class="h-event">Private Event / CalArts</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Aug 25</div>
+          <div class="h-body"><span class="h-event">Resistance Sessions</span> <span class="h-venue">· Beta Level</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Apr 1</div>
+          <div class="h-body"><span class="h-event">Artwallah</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2016</div>
+        <div class="history-item">
+          <div class="h-date">Aug 13</div>
+          <div class="h-body"><span class="h-event">Bollywood Marathon</span> <span class="h-venue">· Machine Project</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 19</div>
+          <div class="h-body"><span class="h-event">REDREAM</span> <span class="h-venue">· Pasadena Playhouse</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2015</div>
+        <div class="history-item">
+          <div class="h-date">Oct 5</div>
+          <div class="h-body"><span class="h-event">Mughal e Azam</span> <span class="h-venue">· LACMA</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 24</div>
+          <div class="h-body"><span class="h-event">Amitabh Bachchan, Bollywood &amp; Sholay</span> <span class="h-venue">· Eagle Rock Center</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-body"><span class="h-event">Eagle Rock Center for the Arts</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2014</div>
+        <div class="history-item">
+          <div class="h-date">Sep 16</div>
+          <div class="h-body"><span class="h-event">Lagaan</span> <span class="h-venue">· LACMA</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">May 24</div>
+          <div class="h-body"><span class="h-event">Mughal E Azam &amp; the Rise of Bollywood</span> <span class="h-venue">· Eagle Rock Center for the Arts</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2013</div>
+        <div class="history-item">
+          <div class="h-date">Oct 23</div>
+          <div class="h-body"><span class="h-event">Subcontinental Scare</span> <span class="h-venue">· Machine Project</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Aug 1</div>
+          <div class="h-body"><span class="h-event">Del Monte Speakeasy</span></div>
+        </div>
+        <div class="history-item">
+          <div class="h-date">Feb 13</div>
+          <div class="h-body"><span class="h-event">Lament the Night</span> <span class="h-venue">· Bookstoor, LA</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2010</div>
+        <div class="history-item">
+          <div class="h-body"><span class="h-event">TablaCentric</span> <span class="h-venue">· Hammer Museum</span></div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2008</div>
+        <div class="history-item">
+          <div class="h-body"><span class="h-event">TablaCentric</span> <span class="h-venue">· Machine Project</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="stripe-bar"></div>
+
+<!-- ============================================================
+     GALLERY
+============================================================ -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="sh reveal">
+      <span class="label">Photos</span>
+      <h2 class="section-title">The <span class="gold">Vision</span></h2>
+      <div class="rule"></div>
+    </div>
+
+    <!-- TO ADD PHOTOS: Replace each <div class="gi-placeholder"> with:
+         <img src="your-photo.jpg" alt="description">
+         inside its .gi parent element. -->
+    <div class="gallery-grid">
+      <div class="gi reveal"><div class="gi-placeholder">Add Photo</div></div>
+      <div class="gi reveal d1"><div class="gi-placeholder">Add Photo</div></div>
+      <div class="gi reveal d1"><div class="gi-placeholder">Add Photo</div></div>
+      <div class="gi reveal d2"><div class="gi-placeholder">Add Photo</div></div>
+      <div class="gi reveal d2"><div class="gi-placeholder">Add Photo</div></div>
+      <div class="gi reveal d3"><div class="gi-placeholder">Add Photo</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="deco-line"></div>
+
+<!-- ============================================================
+     CONNECT
+============================================================ -->
+<section class="connect" id="connect">
+  <div class="container">
+    <div class="reveal">
+      <span class="label">Stream &amp; Follow</span>
+      <h2 class="section-title">Find <span class="gold">SADUBAS</span></h2>
+      <div class="rule" style="margin:1.5rem auto;"></div>
+      <p class="connect-lead">
+        Available across all major platforms. Follow for new music,
+        show announcements, and the occasional cosmic transmission.
+      </p>
+    </div>
+
+    <div class="social-grid">
+      <a href="https://open.spotify.com/search/sadubas" target="_blank" rel="noopener" class="social-tile reveal">
+        <!-- Spotify icon -->
+        <svg class="social-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+        </svg>
+        <span class="social-name">Spotify</span>
+      </a>
+
+      <a href="https://soundcloud.com/sadubas" target="_blank" rel="noopener" class="social-tile reveal d1">
+        <!-- SoundCloud icon -->
+        <svg class="social-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.175 12.225c-.15 0-.267.112-.285.261l-.4 2.563.4 2.516c.018.148.135.26.285.26.149 0 .27-.112.285-.26l.453-2.516-.453-2.563c-.015-.149-.136-.261-.285-.261zm1.516-.424c-.184 0-.332.148-.347.33l-.337 2.958.337 2.863c.015.183.163.328.347.328.183 0 .33-.145.347-.328l.382-2.863-.382-2.958c-.017-.182-.164-.33-.347-.33zm1.638-.138c-.21 0-.38.17-.39.38l-.29 3.096.29 2.976c.01.21.18.38.39.38s.38-.17.39-.38l.33-2.976-.33-3.096c-.01-.21-.18-.38-.39-.38zm1.595-.295c-.233 0-.423.19-.432.424l-.245 3.391.245 3.07c.009.234.199.424.432.424.234 0 .423-.19.432-.424l.278-3.07-.278-3.391c-.009-.234-.198-.424-.432-.424zm6.487-.49C12.112 8.4 10.56 7.5 8.8 7.5c-.408 0-.8.06-1.173.157V17.4c0 .227.185.41.413.41H19.2c1.547 0 2.8-1.255 2.8-2.8 0-1.547-1.255-2.8-2.8-2.8-.184 0-.363.02-.535.055C18.3 9.23 16.5 7.5 14.411 7.5z"/>
+        </svg>
+        <span class="social-name">SoundCloud</span>
+      </a>
+
+      <a href="https://www.youtube.com/@sadubas" target="_blank" rel="noopener" class="social-tile reveal d2">
+        <!-- YouTube icon -->
+        <svg class="social-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        <span class="social-name">YouTube</span>
+      </a>
+
+      <a href="https://www.instagram.com/sadubas" target="_blank" rel="noopener" class="social-tile reveal d3">
+        <!-- Instagram icon -->
+        <svg class="social-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+        </svg>
+        <span class="social-name">Instagram</span>
+      </a>
+
+      <a href="https://sadubas.bandcamp.com/" target="_blank" rel="noopener" class="social-tile reveal d4">
+        <!-- Bandcamp icon -->
+        <svg class="social-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/>
+        </svg>
+        <span class="social-name">Bandcamp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="stripe-bar"></div>
+
+<!-- ============================================================
+     BOOKING
+============================================================ -->
+<section class="booking" id="booking">
+  <div class="booking-inner reveal">
+    <span class="label">Contact</span>
+    <h2 class="section-title" style="font-size: clamp(2.5rem,6vw,4.5rem);">Book <span class="gold">SADUBAS</span></h2>
+    <div class="rule" style="margin: 1.2rem auto;"></div>
+    <p>
+      Available for live performances, special events, museum programs,
+      film screenings, and private engagements. Based in Los Angeles.
+    </p>
+    <a href="mailto:booking@sadubas.com" class="btn btn-gold">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="footer-logo">SADUBAS</div>
+  <div class="footer-tagline">The Sadhus of Bass &nbsp;·&nbsp; Los Angeles</div>
+  <ul class="footer-nav">
+    <li><a href="#about">About</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#history">History</a></li>
+    <li><a href="#gallery">Photos</a></li>
+    <li><a href="#connect">Listen</a></li>
+    <li><a href="#booking">Booking</a></li>
+  </ul>
+  <div class="footer-copy">&copy; 2025 SADUBAS &nbsp;·&nbsp; All Rights Reserved</div>
+</footer>
+
+<!-- ============================================================
+     JS
+============================================================ -->
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile burger
+  const burger = document.getElementById('burger');
+  const navMenu = document.getElementById('navMenu');
+  burger.addEventListener('click', () => {
+    const open = navMenu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  navMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navMenu.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
