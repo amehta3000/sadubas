@@ -278,7 +278,7 @@
     .hero-title {
       font-size: clamp(5.5rem, 22vw, 20rem);
       line-height: 0.82;
-      color: var(--cream);
+      color: rgba(237, 228, 208, 0.68);
       letter-spacing: -0.01em;
       text-shadow: 0 4px 40px rgba(0,0,0,0.6), 0 0 120px rgba(200,136,42,0.12);
     }
@@ -610,6 +610,37 @@
       min-height: 120px;
     }
 
+    a.video-thumb {
+      text-decoration: none;
+      display: block;
+      position: relative;
+    }
+    a.video-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.3s;
+      filter: brightness(0.85);
+      display: block;
+    }
+    a.video-thumb:hover img { transform: scale(1.04); filter: brightness(1); }
+    a.video-thumb::after {
+      content: '▶';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.6rem;
+      color: rgba(255,255,255,0.75);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    a.video-thumb:hover::after { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
+
+    .video-all {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
     @media (max-width: 860px) {
       .video-row { grid-template-columns: 1fr; }
       .video-side { flex-direction: row; }
@@ -718,12 +749,14 @@
     }
 
     .gi { position: relative; overflow: hidden; background: var(--surface); }
-    .gi:nth-child(1) { grid-column: span 7; aspect-ratio: 3/2; }
-    .gi:nth-child(2) { grid-column: span 5; aspect-ratio: 4/3; }
-    .gi:nth-child(3) { grid-column: span 5; aspect-ratio: 4/3; }
-    .gi:nth-child(4) { grid-column: span 4; aspect-ratio: 1; }
-    .gi:nth-child(5) { grid-column: span 4; aspect-ratio: 1; }
-    .gi:nth-child(6) { grid-column: span 4; aspect-ratio: 1; }
+    .gi:nth-child(1) { grid-column: span 12; aspect-ratio: 21/9; }
+    .gi:nth-child(2) { grid-column: span 8;  aspect-ratio: 3/2; }
+    .gi:nth-child(3) { grid-column: span 4;  aspect-ratio: 1; }
+    .gi:nth-child(4) { grid-column: span 4;  aspect-ratio: 1; }
+    .gi:nth-child(5) { grid-column: span 4;  aspect-ratio: 1; }
+    .gi:nth-child(6) { grid-column: span 4;  aspect-ratio: 1; }
+    .gi:nth-child(7) { grid-column: span 7;  aspect-ratio: 3/2; }
+    .gi:nth-child(8) { grid-column: span 5;  aspect-ratio: 4/3; }
 
     .gi img {
       width: 100%; height: 100%;
@@ -759,6 +792,7 @@
       .gallery-grid { grid-template-columns: repeat(2,1fr); }
       .gi:nth-child(n) { grid-column: span 1; aspect-ratio: 1; }
       .gi:nth-child(1) { grid-column: span 2; aspect-ratio: 16/9; }
+      .gi:nth-child(2) { grid-column: span 2; aspect-ratio: 16/9; }
     }
 
     /* ============================================================
@@ -1024,10 +1058,11 @@
   <div class="hero-ring"></div>
 
   <div class="hero-content">
-    <div class="hero-eyebrow">Los Angeles &nbsp;·&nbsp; Since 1999</div>
+    <div class="hero-eyebrow">The Sadhus of Bass</div>
+    <!-- <div class="hero-eyebrow">Los Angeles &nbsp;·&nbsp; Since 1999</div> -->
     <h1 class="hero-title">SADUBAS</h1>
-    <p class="hero-subtitle">The Sadhus of Bass</p>
-    <p class="hero-tagline">Bollywood Psychedelia &nbsp;·&nbsp; Tabla &nbsp;·&nbsp; Beat Machines &nbsp;·&nbsp; Golden Era</p>
+    <!-- <p class="hero-subtitle">The Sadhus of Bass</p> -->
+    <p class="hero-tagline">Cinematic &nbsp;·&nbsp; Bollywood Psychedelia &nbsp;·&nbsp; Disco</p>
     <div class="hero-actions">
       <a href="#shows" class="btn btn-gold">Upcoming Shows</a>
       <a href="#videos" class="btn btn-ghost">Watch &amp; Listen</a>
@@ -1176,18 +1211,34 @@
         </div>
       </div>
 
-      <!-- Side panel -->
+      <!-- Side: 3 featured video thumbnails -->
       <div class="video-side reveal d2">
-        <div style="padding: 1.5rem; background: var(--surface); border-left: 3px solid var(--red);">
-          <p style="font-family:'DM Serif Display',serif; font-style:italic; font-size:1.15rem; color:var(--cream); line-height:1.6; margin-bottom: 1rem;">
-            "The Barddhaman Local departs Howrah Station at 5:30am, taking its passengers deep into the West Bengal countryside."
-          </p>
-          <p style="font-size:0.65rem; letter-spacing:0.2em; color:var(--cream-dim); text-transform:uppercase;">Premiered · 3rd i Film Festival · San Francisco · Oct 2024</p>
-          <p style="font-size:0.65rem; letter-spacing:0.2em; color:var(--cream-dim); text-transform:uppercase; margin-top:0.4rem;">Cinematography · Rusha Bose</p>
-        </div>
-
-        <div class="video-coming">More Videos · Coming Soon</div>
+        <a href="https://www.youtube.com/watch?v=aaSegAL5S5c" target="_blank" rel="noopener" class="video-thumb">
+          <img src="https://i.ytimg.com/vi/aaSegAL5S5c/mqdefault.jpg" alt="Basti Basti — The Great Stage 2025">
+          <div class="video-thumb-label">
+            <h4>Basti Basti</h4>
+            <span>The Great Stage · Irvine, CA · 2025</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=Y63l-_uoLfE" target="_blank" rel="noopener" class="video-thumb">
+          <img src="https://i.ytimg.com/vi/Y63l-_uoLfE/mqdefault.jpg" alt="Academy Museum 2024 — Indian Cinema Remixed">
+          <div class="video-thumb-label">
+            <h4>Academy Museum 2024</h4>
+            <span>Indian Cinema Remixed · Los Angeles</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=K7yc3vkW1ZA" target="_blank" rel="noopener" class="video-thumb">
+          <img src="https://i.ytimg.com/vi/K7yc3vkW1ZA/mqdefault.jpg" alt="Amani — Live at Bowers Museum July 2023">
+          <div class="video-thumb-label">
+            <h4>Amani</h4>
+            <span>Live at Bowers Museum · July 2023</span>
+          </div>
+        </a>
       </div>
+    </div>
+
+    <div class="video-all reveal">
+      <a href="https://www.youtube.com/playlist?list=PLQF1gx7zTC4o7MACp9YgmHU8il3zKcM_-" target="_blank" rel="noopener" class="btn btn-ghost">View more videos on YouTube</a>
     </div>
   </div>
 </section>
@@ -1206,20 +1257,7 @@
     </div>
 
     <ul class="show-list">
-      <li class="show-item reveal d1">
-        <div class="show-date-block">
-          <div class="show-day">03</div>
-          <div class="show-month">May 2025</div>
-        </div>
-        <div class="show-body">
-          <h3>Echoes of Diplomacy: India's Sonic Footprint in the Cold War Era</h3>
-          <div class="show-venue">The Wende Museum · Glorya Kaufman Community Center</div>
-          <div class="show-loc">Culver City, CA &nbsp;·&nbsp; 3:00 PM &nbsp;·&nbsp; Free Admission</div>
-        </div>
-        <a href="https://eventvesta.com/events/103126/t/tickets" target="_blank" rel="noopener" class="show-link free">RSVP Free</a>
-      </li>
-
-      <li class="show-item reveal d2" style="opacity: 0.45;">
+      <li class="show-item reveal d1" style="opacity: 0.45;">
         <div class="show-date-block">
           <div class="show-day">TBA</div>
           <div class="show-month">2025</div>
@@ -1527,16 +1565,31 @@
       <div class="rule"></div>
     </div>
 
-    <!-- TO ADD PHOTOS: Replace each <div class="gi-placeholder"> with:
-         <img src="your-photo.jpg" alt="description">
-         inside its .gi parent element. -->
     <div class="gallery-grid">
-      <div class="gi reveal"><div class="gi-placeholder">Add Photo</div></div>
-      <div class="gi reveal d1"><div class="gi-placeholder">Add Photo</div></div>
-      <div class="gi reveal d1"><div class="gi-placeholder">Add Photo</div></div>
-      <div class="gi reveal d2"><div class="gi-placeholder">Add Photo</div></div>
-      <div class="gi reveal d2"><div class="gi-placeholder">Add Photo</div></div>
-      <div class="gi reveal d3"><div class="gi-placeholder">Add Photo</div></div>
+      <div class="gi reveal">
+        <img src="images/sadubas_kid_synthesis_banner.jpg" alt="SADUBAS — Studio Session">
+      </div>
+      <div class="gi reveal d1">
+        <img src="images/band-photo-1.png" alt="SADUBAS — Sound System">
+      </div>
+      <div class="gi reveal d1">
+        <img src="images/2023_dublab2.png" alt="SADUBAS × Dublab — November 2023">
+      </div>
+      <div class="gi reveal d2">
+        <img src="images/202307_bowers.png" alt="SADUBAS Live at Bowers Museum — July 2023">
+      </div>
+      <div class="gi reveal d2">
+        <img src="images/Dublab_20240502.png" alt="SADUBAS × Dublab — May 2024">
+      </div>
+      <div class="gi reveal d2">
+        <img src="images/sadubas_ccartwalk2023.png" alt="SADUBAS at Culver City Art Walk 2023">
+      </div>
+      <div class="gi reveal d3">
+        <img src="images/band-photo-2.jpg" alt="SADUBAS — The Resistance Sessions 2017">
+      </div>
+      <div class="gi reveal d3">
+        <img src="images/sadubas_himalayas.png" alt="SADUBAS — Himalayas">
+      </div>
     </div>
   </div>
 </section>
