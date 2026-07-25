@@ -1183,13 +1183,13 @@
         </div>
         <div class="reveal">
           <div class="video-frame" id="videoFrame">
-            <img id="videoPoster" src="../images/139d888f-994f-464f-b6f1-e56bb81c5eca.JPG" alt="Sadubas performing live with projected film imagery" loading="lazy" decoding="async">
-            <button class="video-play" id="videoPlay" type="button"><span aria-hidden="true">▶</span> Play live film</button>
+            <img id="videoPoster" src="https://i.ytimg.com/vi/K7yc3vkW1ZA/maxresdefault.jpg" alt="Sadubas performing Amani live at the Bowers Museum" loading="lazy" decoding="async">
+            <button class="video-play" id="videoPlay" type="button"><span aria-hidden="true">▶</span> Play Amani</button>
           </div>
           <div class="video-caption">
             <div>
-              <h3 id="videoTitle">Live at the Academy Museum</h3>
-              <p id="videoVenue">Academy Museum of Motion Pictures · Los Angeles</p>
+              <h3 id="videoTitle">Amani — Live at the Bowers Museum</h3>
+              <p id="videoVenue">Bowers Museum · Santa Ana · July 2023</p>
             </div>
             <span class="runtime" id="videoRuntime">04:12</span>
           </div>
@@ -1320,11 +1320,11 @@
         { title: "JAI JAI", duration: "TBD", src: "/label/audio/10-jai-jai.mp3", priority: "" }
       ],
       video: {
-        title: "Live at the Academy Museum",
-        venue: "Academy Museum of Motion Pictures · Los Angeles",
-        runtime: "04:12",
-        poster: "../images/139d888f-994f-464f-b6f1-e56bb81c5eca.JPG",
-        embed: "https://www.youtube-nocookie.com/embed/80jMBDo9gDk?rel=0&modestbranding=1"
+        title: "Amani — Live at the Bowers Museum",
+        venue: "Bowers Museum · Santa Ana · July 2023",
+        runtime: "03:01",
+        poster: "https://i.ytimg.com/vi/K7yc3vkW1ZA/maxresdefault.jpg",
+        embed: "https://www.youtube-nocookie.com/embed/K7yc3vkW1ZA?rel=0&modestbranding=1&playsinline=1"
       },
       artist: {
         image: "../images/hero-banner.png",
@@ -1536,7 +1536,8 @@
       iframe.src = video.embed;
       iframe.title = `${video.title} — ${video.venue}`;
       iframe.loading = "lazy";
-      iframe.allow = "encrypted-media; picture-in-picture";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      iframe.allow = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
       iframe.allowFullscreen = true;
       $("#videoFrame").replaceChildren(iframe);
     });
