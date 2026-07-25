@@ -325,7 +325,7 @@
       height: 100%;
       object-fit: cover;
       object-position: 70% center;
-      filter: saturate(0.7) contrast(1.08) brightness(0.66);
+      filter: saturate(0.85) contrast(1.05) brightness(0.92);
     }
 
     .hero::before {
@@ -334,8 +334,8 @@
       z-index: 1;
       content: "";
       background:
-        linear-gradient(90deg, rgba(7, 6, 6, 0.98) 0%, rgba(7, 6, 6, 0.84) 37%, rgba(7, 6, 6, 0.18) 72%),
-        linear-gradient(0deg, rgba(7, 6, 6, 0.98) 0%, transparent 55%);
+        linear-gradient(90deg, rgba(7, 6, 6, 0.72) 0%, rgba(7, 6, 6, 0.45) 37%, rgba(7, 6, 6, 0.05) 72%),
+        linear-gradient(0deg, rgba(7, 6, 6, 0.88) 0%, rgba(7, 6, 6, 0.05) 55%);
     }
 
     .hero::after {
@@ -1008,11 +1008,11 @@
       .nav-inner { width: min(calc(100% - 2rem), var(--max)); }
       section { padding: 5rem 0; }
       .hero { padding-bottom: 4rem; }
-      .hero-image { object-position: 66% center; }
+      .hero-image { object-position: 70% 30%; }
       .hero::before {
         background:
-          linear-gradient(90deg, rgba(7, 6, 6, 0.92) 0%, rgba(7, 6, 6, 0.4) 100%),
-          linear-gradient(0deg, rgba(7, 6, 6, 0.99) 0%, rgba(7, 6, 6, 0.14) 72%);
+          linear-gradient(90deg, rgba(7, 6, 6, 0.7) 0%, rgba(7, 6, 6, 0.2) 100%),
+          linear-gradient(0deg, rgba(7, 6, 6, 0.88) 0%, rgba(7, 6, 6, 0.1) 72%);
       }
       .hero-index { display: none; }
       .hero-actions .btn { width: 100%; }
@@ -1283,7 +1283,9 @@
     /*
      * ============================================================
      * LABEL DATA — replace copy, tracks, links, images, and video here.
-     * Use paths relative to /label/ (for example: "../media/track-01.mp3").
+     * Private audio is served by the Cloudflare Worker at /label/audio/.
+     * The backing R2 bucket (cinematica-private) remains private and is
+     * available only to the Worker through its CINEMATICA binding.
      * Empty track/download URLs show a clear private-placeholder message.
      * ============================================================
      */
@@ -1296,7 +1298,7 @@
         image: "../images/hero-banner.png"
       },
       album: {
-        runtime: "42:18",
+        runtime: "Runtime TBD",
         artwork: "../images/cinematica-cover.jpg",
         story: [
           "Cinematica is a record about memory behaving like cinema: vivid, incomplete, and always moving. Golden Era Bollywood fragments surface inside slow drums, analogue haze, tabla, and low-frequency electronics.",
@@ -1305,16 +1307,16 @@
         ]
       },
       tracks: [
-        { title: "Opening Titles", duration: "3:42", src: "", priority: "" },
-        { title: "Monsoon on Sunset", duration: "4:18", src: "", priority: "Priority track" },
-        { title: "The Projectionist", duration: "3:57", src: "", priority: "" },
-        { title: "Bombay Nocturne", duration: "4:36", src: "", priority: "" },
-        { title: "Intermission / Red Curtain", duration: "2:14", src: "", priority: "" },
-        { title: "Cinematica", duration: "5:08", src: "", priority: "Priority track" },
-        { title: "Palace of Echoes", duration: "4:09", src: "", priority: "" },
-        { title: "Memory Machine", duration: "4:27", src: "", priority: "" },
-        { title: "Two Childhood Frequencies", duration: "5:02", src: "", priority: "Priority track" },
-        { title: "End Credits (Somewhere Else)", duration: "4:45", src: "", priority: "" }
+        { title: "DISTANCE", duration: "TBD", src: "/label/audio/01-distance.mp3", priority: "" },
+        { title: "AMANI", duration: "TBD", src: "/label/audio/02-amani.mp3", priority: "" },
+        { title: "CIRCULAR MOMENTUM", duration: "TBD", src: "/label/audio/03-circular-momentum.mp3", priority: "Priority track" },
+        { title: "MERE DIL", duration: "TBD", src: "/label/audio/04-mere-dil.mp3", priority: "Priority track" },
+        { title: "DANCE WITH ME", duration: "TBD", src: "/label/audio/05-dance-with-me.mp3", priority: "" },
+        { title: "YE CONTRACT", duration: "TBD", src: "/label/audio/06-ye-contract.mp3", priority: "Priority track" },
+        { title: "SAAF KARO", duration: "TBD", src: "/label/audio/07-saaf-karo.mp3", priority: "" },
+        { title: "DESTROYER", duration: "TBD", src: "/label/audio/08-destroyer.mp3", priority: "" },
+        { title: "KAILASH", duration: "TBD", src: "/label/audio/09-kailash.mp3", priority: "" },
+        { title: "JAI JAI", duration: "TBD", src: "/label/audio/10-jai-jai.mp3", priority: "" }
       ],
       video: {
         title: "Live at the Academy Museum",
