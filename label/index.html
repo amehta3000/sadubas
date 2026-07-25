@@ -801,18 +801,17 @@
     .performance-list { border-top: 1px solid var(--line); }
     .performance {
       display: grid;
-      grid-template-columns: 80px minmax(0, 1fr) minmax(180px, 0.5fr);
+      grid-template-columns: minmax(0, 1fr) minmax(180px, 0.45fr);
       gap: 2rem;
       align-items: center;
       min-height: 78px;
       border-bottom: 1px solid var(--line);
     }
-    .performance-year {
-      color: var(--gold);
-      font-family: "Bebas Neue", Impact, sans-serif;
-      font-size: 1.45rem;
+    .performance-venue {
+      color: var(--cream);
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      font-weight: 600;
     }
-    .performance-venue { color: var(--cream); font-weight: 600; }
     .performance-context {
       color: var(--cream-dim);
       font-size: 0.7rem;
@@ -1026,11 +1025,11 @@
       .gallery-item:nth-child(4),
       .gallery-item:nth-child(5) { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
       .performance {
-        grid-template-columns: 56px 1fr;
-        gap: 1rem;
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
         padding: 1rem 0;
       }
-      .performance-context { grid-column: 2; }
+      .performance-context { grid-column: 1; }
       .download-list { grid-template-columns: 1fr; }
       .download-item.featured { grid-column: auto; }
       footer { flex-direction: column; text-align: center; }
@@ -1228,10 +1227,10 @@
       <div class="container">
         <div class="section-top reveal">
           <div>
-            <span class="eyebrow">Selected performances</span>
+            <span class="eyebrow">Selected rooms &amp; stages</span>
             <h2 class="section-heading" id="performanceTitle">Rooms that <span class="gold">listen closely.</span></h2>
           </div>
-          <p class="section-intro">A compact history of arts, film, museum, and culture-led performances.</p>
+          <p class="section-intro">Museums, cultural institutions, and public stages across greater Los Angeles.</p>
         </div>
         <div class="performance-list reveal" id="performanceList"></div>
       </div>
@@ -1343,11 +1342,15 @@
         { image: "../images/resistence_main_6001.png", alt: "Sadubas Resistance Sessions artwork", label: "Vinyl / object placeholder" }
       ],
       performances: [
-        { year: "2024", venue: "Academy Museum of Motion Pictures", context: "Los Angeles · Live A/V performance" },
-        { year: "2023", venue: "Bowers Museum", context: "Santa Ana · Museum program" },
-        { year: "2020", venue: "REDCAT", context: "Los Angeles · Gala performance" },
-        { year: "2015", venue: "LACMA", context: "Los Angeles · Film program" },
-        { year: "2010", venue: "Hammer Museum", context: "Los Angeles · TablaCentric" }
+        { venue: "Academy Museum of Motion Pictures", context: "Los Angeles" },
+        { venue: "Bowers Museum", context: "Santa Ana" },
+        { venue: "REDCAT", context: "Downtown Los Angeles" },
+        { venue: "LACMA", context: "Los Angeles" },
+        { venue: "Hammer Museum", context: "Los Angeles" },
+        { venue: "Wende Museum", context: "Culver City" },
+        { venue: "Culver City Summer Sunset Series", context: "Culver City" },
+        { venue: "Grand Park Los Angeles", context: "Downtown Los Angeles" },
+        { venue: "Great Park Live", context: "Irvine" }
       ],
       partnership: {
         copy: "We’re looking for a thoughtful global partner who hears the record’s long arc: release strategy, physical editions, editorial storytelling, sync, and a live campaign built around the project’s cinematic world.",
@@ -1558,20 +1561,17 @@
       $("#gallery").appendChild(figure);
     });
 
-    // Selected performance history.
+    // Selected performance spaces.
     LABEL_DATA.performances.forEach(show => {
       const row = document.createElement("div");
       row.className = "performance";
-      const year = document.createElement("span");
-      year.className = "performance-year";
-      year.textContent = show.year;
       const venue = document.createElement("span");
       venue.className = "performance-venue";
       venue.textContent = show.venue;
       const context = document.createElement("span");
       context.className = "performance-context";
       context.textContent = show.context;
-      row.append(year, venue, context);
+      row.append(venue, context);
       $("#performanceList").appendChild(row);
     });
 
