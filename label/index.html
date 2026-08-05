@@ -8,7 +8,7 @@
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
   <meta name="referrer" content="no-referrer">
   <meta name="theme-color" content="#070606">
-  <title>SADUBAS — Cinematica | Private Label Presentation</title>
+  <title>SADUBAS: Cinematica | Private Label Presentation</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
 
   <style>
     /* ============================================================
-       TOKENS + RESET — aligned with the public SADUBAS site
+       TOKENS + RESET: aligned with the public SADUBAS site
     ============================================================ */
     *, *::before, *::after { box-sizing: border-box; }
     * { margin: 0; }
@@ -373,6 +373,7 @@
     }
 
     .hero-artist {
+      padding-left: clamp(0.28rem, 0.65vw, 0.6rem);
       color: var(--gold-light);
       font-size: clamp(1rem, 1.8vw, 1.35rem);
       font-weight: 700;
@@ -438,16 +439,6 @@
       isolation: isolate;
       background: var(--surface);
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
-    }
-
-    .album-cover::before {
-      position: absolute;
-      inset: 8%;
-      z-index: 1;
-      content: "";
-      border: 1px solid rgba(226, 176, 96, 0.45);
-      box-shadow: 0 0 0 1px rgba(7, 6, 6, 0.4);
-      pointer-events: none;
     }
 
     .album-cover img {
@@ -610,17 +601,9 @@
     ============================================================ */
     .story-grid {
       display: grid;
-      grid-template-columns: 0.72fr 1.28fr;
+      grid-template-columns: 0.42fr 1.58fr;
       gap: clamp(3rem, 9vw, 9rem);
       align-items: start;
-    }
-
-    .story-index {
-      margin-top: 1rem;
-      color: var(--gold-dim);
-      font-family: "Bebas Neue", Impact, sans-serif;
-      font-size: clamp(7rem, 16vw, 14rem);
-      line-height: 0.75;
     }
 
     .story-copy p {
@@ -725,7 +708,7 @@
       aspect-ratio: 4 / 3;
       width: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center 20%;
       filter: saturate(0.72) contrast(1.08);
     }
 
@@ -744,6 +727,17 @@
       border-bottom: 1px solid var(--line);
     }
     .member h3 { color: var(--gold-light); font-size: 1.45rem; }
+    .member h3 a {
+      color: inherit;
+      text-decoration-color: transparent;
+      text-underline-offset: 0.18em;
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .member h3 a:hover,
+    .member h3 a:focus-visible {
+      color: var(--cream);
+      text-decoration-color: var(--gold);
+    }
     .member p {
       margin: 0;
       color: var(--cream-dim);
@@ -767,12 +761,18 @@
       overflow: hidden;
       background: var(--surface);
     }
+    .gallery-media {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
     .gallery-item:nth-child(1) { grid-column: span 6; aspect-ratio: 1; }
     .gallery-item:nth-child(2) { grid-column: span 6; aspect-ratio: 1; }
     .gallery-item:nth-child(3) { grid-column: span 4; aspect-ratio: 2 / 3; }
     .gallery-item:nth-child(4) { grid-column: span 8; aspect-ratio: 16 / 10; }
     .gallery-item:nth-child(5) { grid-column: span 8; aspect-ratio: 16 / 9; }
     .gallery-item:nth-child(6) { grid-column: span 4; aspect-ratio: 1; }
+    .gallery-item:nth-child(n + 7) { grid-column: span 6; aspect-ratio: 1098 / 648; }
 
     .gallery-item img {
       width: 100%;
@@ -783,16 +783,20 @@
     }
     .gallery-item:hover img { transform: scale(1.035); filter: saturate(1) contrast(1.03); }
 
-    .gallery-label {
-      position: absolute;
-      inset: auto 0 0;
-      padding: 2.5rem 1rem 1rem;
-      color: var(--cream);
-      background: linear-gradient(transparent, rgba(7, 6, 6, 0.88));
-      font-size: 0.63rem;
-      font-weight: 700;
-      letter-spacing: 0.23em;
-      text-transform: uppercase;
+    .gallery-item.no-crop {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface-2);
+    }
+    .gallery-item.no-crop .gallery-media {
+      height: auto;
+      flex: none;
+      background: var(--surface-2);
+    }
+    .gallery-item.no-crop img { object-fit: contain; }
+    .gallery-item.no-crop:hover img {
+      transform: none;
+      filter: saturate(1) contrast(1.03);
     }
 
     /* ============================================================
@@ -927,6 +931,11 @@
     }
     .contact .container { max-width: 920px; }
     .contact .eyebrow::before { display: none; }
+    .contact-logo {
+      width: min(320px, 72vw);
+      height: auto;
+      margin: 0 auto 2rem;
+    }
     .contact-heading {
       margin-top: 1.1rem;
       font-size: clamp(4.2rem, 12vw, 10rem);
@@ -1017,13 +1026,13 @@
       .hero-index { display: none; }
       .hero-actions .btn { width: 100%; }
       .story-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .story-index { font-size: 6rem; }
       .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .gallery-item:nth-child(n) { grid-column: span 1; aspect-ratio: 1; }
       .gallery-item:nth-child(1),
       .gallery-item:nth-child(2) { grid-column: 1 / -1; aspect-ratio: 1; }
       .gallery-item:nth-child(4),
       .gallery-item:nth-child(5) { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
+      .gallery-item:nth-child(n + 7) { aspect-ratio: 1098 / 648; }
       .performance {
         grid-template-columns: 1fr;
         gap: 0.35rem;
@@ -1060,6 +1069,7 @@
       .gallery-item:nth-child(n) { aspect-ratio: 4 / 3; }
       .gallery-item:nth-child(1),
       .gallery-item:nth-child(2) { aspect-ratio: 1; }
+      .gallery-item:nth-child(n + 7) { aspect-ratio: 1098 / 648; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1100,7 +1110,7 @@
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="heroTitle">
-      <img class="hero-image" id="heroImage" src="../images/hero-banner.png" alt="" fetchpriority="high">
+      <img class="hero-image" id="heroImage" src="https://media.sadubas.com/hero-banner.png" alt="" fetchpriority="high">
       <div class="container">
         <div class="hero-content reveal">
           <div class="private-mark" id="privacyLabel">Private and unreleased</div>
@@ -1121,7 +1131,7 @@
         <div class="section-top reveal">
           <div>
             <span class="eyebrow">The unreleased album</span>
-            <h2 class="section-heading" id="listenTitle">Begin with <span class="gold">the record.</span></h2>
+            <h2 class="section-heading" id="listenTitle">Experience <span class="gold">the record.</span></h2>
           </div>
           <p class="section-intro">Ten tracks sequenced as a continuous cinematic arc. Priority focus tracks are marked for a first listen.</p>
         </div>
@@ -1133,7 +1143,7 @@
             </div>
             <div class="album-meta">
               <span>10 tracks</span>
-              <span id="albumRuntime">42:18</span>
+              <span id="albumRuntime">33:00</span>
               <span>Unreleased</span>
             </div>
           </div>
@@ -1161,10 +1171,9 @@
         <div class="story-grid">
           <div class="reveal">
             <span class="eyebrow">About the album</span>
-            <div class="story-index" aria-hidden="true">02</div>
           </div>
           <div class="story-copy reveal">
-            <h2 class="section-heading" id="storyTitle">A lost film, <span class="red">heard in fragments.</span></h2>
+            <h2 class="section-heading" id="storyTitle">A soundtrack for a film <span class="red">that never existed.</span></h2>
             <div id="albumStory"></div>
           </div>
         </div>
@@ -1187,7 +1196,7 @@
           </div>
           <div class="video-caption">
             <div>
-              <h3 id="videoTitle">Amani — Live at the Bowers Museum</h3>
+              <h3 id="videoTitle">Amani: Live at the Bowers Museum</h3>
               <p id="videoVenue">Bowers Museum · Santa Ana · July 2023</p>
             </div>
             <span class="runtime" id="videoRuntime">04:12</span>
@@ -1199,10 +1208,10 @@
     <section id="artist" aria-labelledby="artistTitle">
       <div class="container">
         <div class="artist-grid">
-          <img class="duo-photo reveal" id="duoPhoto" src="../images/hero-banner.png" alt="Ameet Mehta and Robin Sukhadia of Sadubas performing live" loading="lazy" decoding="async">
+          <img class="duo-photo reveal" id="duoPhoto" src="../images/Sadubas-headshot.jpg" alt="Ameet Mehta and Robin Sukhadia of SADUBAS standing together outdoors" loading="lazy" decoding="async">
           <div class="artist-copy reveal">
             <span class="eyebrow">About Sadubas</span>
-            <h2 class="section-heading" id="artistTitle">Two childhood <span class="gold">frequencies.</span></h2>
+            <h2 class="section-heading" id="artistTitle">Two artists. <span class="gold">One vision.</span></h2>
             <p id="artistBio"></p>
             <div class="members" id="members"></div>
           </div>
@@ -1239,8 +1248,8 @@
     <section class="partnership" id="partnership" aria-labelledby="partnershipTitle">
       <div class="container partnership-inner">
         <div class="reveal">
-          <span class="eyebrow">What we’re looking for</span>
-          <h2 class="section-heading" id="partnershipTitle">A label partner for the <span class="gold">full picture.</span></h2>
+          <span class="eyebrow">Partnership</span>
+          <h2 class="section-heading" id="partnershipTitle">Seeking label and <span class="gold">sync partners.</span></h2>
         </div>
         <div class="reveal">
           <p id="partnershipCopy"></p>
@@ -1265,6 +1274,7 @@
 
     <section class="contact" id="contact" aria-labelledby="contactTitle">
       <div class="container reveal">
+        <img class="contact-logo" src="../images/sadubas-log-web.png" alt="SADUBAS logo" loading="lazy" decoding="async">
         <span class="eyebrow">Direct contact</span>
         <h2 class="contact-heading" id="contactTitle">Let’s talk <span class="red">Cinematica.</span></h2>
         <p class="contact-copy" id="contactCopy"></p>
@@ -1282,7 +1292,7 @@
   <script>
     /*
      * ============================================================
-     * LABEL DATA — replace copy, tracks, links, images, and video here.
+     * LABEL DATA: replace copy, tracks, links, images, and video here.
      * Private audio is served by the Cloudflare Worker at /label/audio/.
      * The backing R2 bucket (cinematica-private) remains private and is
      * available only to the Worker through its CINEMATICA binding.
@@ -1294,52 +1304,66 @@
         artist: "SADUBAS",
         title: "Cinematica",
         privacy: "Private and unreleased",
-        position: "Bollywood psychedelia, tabla ritual, and machine rhythm—composed as the soundtrack to a film that never existed.",
-        image: "../images/hero-banner.png"
+        position: "Bollywood psychedelia, South Asian rhythms, and trip-hop atmosphere, unfolding like the soundtrack to a film that never existed.",
+        image: "https://media.sadubas.com/hero-banner.png"
       },
       album: {
-        runtime: "Runtime TBD",
+        runtime: "Runtime 33:00",
         artwork: "../images/cinematica-cover.jpg",
         story: [
-          "Cinematica is a record about memory behaving like cinema: vivid, incomplete, and always moving. Golden Era Bollywood fragments surface inside slow drums, analogue haze, tabla, and low-frequency electronics.",
-          "This placeholder narrative should be replaced with the final album story, recording context, creative references, and the emotional arc behind the sequence.",
-          "The result is neither revival nor pastiche. It is an imagined soundtrack—South Asian in its source language, Los Angeles in its construction, and designed to travel well beyond either frame."
+          "Cinematica turns memory into a film score: vivid, fragmented, and always in motion. Golden Era Bollywood samples move through slow drums, analogue haze, tabla, and deep electronic bass.",
+          "Built in Los Angeles from South Asian source material, the album unfolds as one continuous sequence. Each track is a scene, and each transition is part of the story."
         ]
       },
       tracks: [
-        { title: "DISTANCE", duration: "TBD", src: "/label/audio/01-distance.mp3", priority: "" },
-        { title: "AMANI", duration: "TBD", src: "/label/audio/02-amani.mp3", priority: "" },
-        { title: "CIRCULAR MOMENTUM", duration: "TBD", src: "/label/audio/03-circular-momentum.mp3", priority: "Priority track" },
-        { title: "MERE DIL", duration: "TBD", src: "/label/audio/04-mere-dil.mp3", priority: "Priority track" },
-        { title: "DANCE WITH ME", duration: "TBD", src: "/label/audio/05-dance-with-me.mp3", priority: "" },
-        { title: "YE CONTRACT", duration: "TBD", src: "/label/audio/06-ye-contract.mp3", priority: "Priority track" },
-        { title: "SAAF KARO", duration: "TBD", src: "/label/audio/07-saaf-karo.mp3", priority: "" },
-        { title: "DESTROYER", duration: "TBD", src: "/label/audio/08-destroyer.mp3", priority: "" },
-        { title: "KAILASH", duration: "TBD", src: "/label/audio/09-kailash.mp3", priority: "" },
-        { title: "JAI JAI", duration: "TBD", src: "/label/audio/10-jai-jai.mp3", priority: "" }
+        { title: "DISTANCE", duration: "1:57", src: "/label/audio/01-distance.mp3", priority: "" },
+        { title: "AMANI", duration: "4:34", src: "/label/audio/02-amani.mp3", priority: "Priority track" },
+        { title: "CIRCULAR MOMENTUM", duration: "2:46", src: "/label/audio/03-circular-momentum.mp3", priority: "" },
+        { title: "MERE DIL", duration: "3:11", src: "/label/audio/04-mere-dil.mp3", priority: "Priority track" },
+        { title: "DANCE WITH ME", duration: "2:51", src: "/label/audio/05-dance-with-me.mp3", priority: "" },
+        { title: "YE CONTRACT", duration: "3:05", src: "/label/audio/06-ye-contract.mp3", priority: "Priority track" },
+        { title: "SAAF KARO", duration: "3:09", src: "/label/audio/07-saaf-karo.mp3", priority: "" },
+        { title: "DESTROYER", duration: "3:08", src: "/label/audio/08-destroyer.mp3", priority: "" },
+        { title: "KAILASH", duration: "2:40", src: "/label/audio/09-kailash.mp3", priority: "" },
+        { title: "JAI JAI", duration: "5:04", src: "/label/audio/10-jai-jai.mp3", priority: "" }
       ],
       video: {
-        title: "Amani — Live at the Bowers Museum",
+        title: "Amani: Live at the Bowers Museum",
         venue: "Bowers Museum · Santa Ana · July 2023",
         runtime: "03:01",
         poster: "https://i.ytimg.com/vi/K7yc3vkW1ZA/maxresdefault.jpg",
         embed: "https://www.youtube-nocookie.com/embed/K7yc3vkW1ZA?rel=0&modestbranding=1&playsinline=1"
       },
       artist: {
-        image: "../images/hero-banner.png",
-        bio: "SADUBAS—The Sadhus of Bass—is Ameet Mehta and Robin Sukhadia, two childhood collaborators building at the meeting point of tabla, electronic machines, Golden Era Bollywood, and cinematic projection. Active since 1999 and based in Los Angeles, their live language is equal parts sound system, film score, and ritual.",
+        image: "../images/Sadubas-headshot.jpg",
+        bio: "SADUBAS (The Sadhus of Bass) is Ameet Mehta and Robin Sukhadia, two childhood collaborators building at the meeting point of tabla, electronic machines, Golden Era Bollywood, and cinematic projection.",
         members: [
-          { name: "Ameet Mehta", role: "Electronic machines · Synthesizers · Production" },
-          { name: "Robin Sukhadia", role: "Tabla · Classical percussion · Production" }
+          { name: "Ameet Mehta", url: "https://parttimechiller.com", role: "Electronic machines · Synthesizers · Production" },
+          { name: "Robin Sukhadia", url: "https://tablapusher.com", role: "Tabla · Classical percussion · Production" }
         ]
       },
       gallery: [
         { image: "../images/cinematica-cover.jpg", alt: "Front cover artwork for the SADUBAS album Cinematica", label: "Final cover art · Front" },
         { image: "../images/cinematica-back-cover.jpg", alt: "Back cover and credits artwork for the SADUBAS album Cinematica", label: "Final cover art · Back / credits" },
-        { image: "../images/sadubas_akira.png", alt: "Sadubas illustrated campaign still", label: "Campaign still · 03" },
-        { image: "../images/139d888f-994f-464f-b6f1-e56bb81c5eca.JPG", alt: "Sadubas performing against projected cinema imagery", label: "Live projection · Academy Museum" },
-        { image: "../images/sadubas_kid_synthesis_banner.jpg", alt: "Sadubas live audiovisual performance artwork", label: "Photography / live environment" },
-        { image: "../images/resistence_main_6001.png", alt: "Sadubas Resistance Sessions artwork", label: "Vinyl / object placeholder" }
+        { image: "../images/sadubas_cube.png", alt: "Illustrated SADUBAS portrait with speakers, synthesizer, and tabla", label: "Illustrated campaign still · Cube" },
+        { image: "../images/Robin Bowers 2019.JPG", alt: "Robin Sukhadia with tabla and electronic equipment at the Bowers Museum", label: "Live setup · Bowers Museum", fit: "contain", ratio: "4 / 3" },
+        { image: "https://media.sadubas.com/sadubas_kid_synthesis_banner.jpg", alt: "Sadubas live audiovisual performance artwork", label: "Photography / live environment" },
+        { image: "../images/sadubas_savedateII.png", alt: "SADUBAS Rockwell event save-the-date poster", label: "Event artwork · Rockwell", fit: "contain", ratio: "1 / 1" },
+        { image: "../images/sadubas-card-01.jpg", alt: "Ameet Mehta and Robin Sukhadia performing with tabla and electronic equipment", label: "Archive card · 01" },
+        { image: "../images/sadubas-card-04.jpg", alt: "Black-and-white Sadubas live performance with red title lettering", label: "Archive card · 04" },
+
+        // { image: "../images/sadubas-card-02.jpg", alt: "Sadubas title set within ornate arched stone architecture", label: "Archive card · 02" },
+        // { image: "../images/sadubas-card-03.jpg", alt: "Sadubas title over a Golden Era Bollywood collage", label: "Archive card · 03" },
+        // { image: "../images/sadubas-card-04.jpg", alt: "Black-and-white Sadubas live performance with red title lettering", label: "Archive card · 04" },
+        // { image: "../images/sadubas-card-06.jpg", alt: "Close-up of hands performing with electronic music equipment", label: "Archive card · 06" },
+        // { image: "../images/sadubas-card-08.jpg", alt: "Sadubas title above a group of tabla drums", label: "Archive card · 08" },
+        // { image: "../images/IMG_7542.JPG", alt: "SADUBAS performance setup with tabla, synthesizers, and electronic equipment", label: "Live setup · 01", fit: "contain", ratio: "16 / 9" },
+        // { image: "../images/IMG-4394.JPG", alt: "SADUBAS performing in front of a projected film image", label: "Live projection · 02", fit: "contain", ratio: "16 / 9" },
+        { image: "../images/7G5A0025.jpeg", alt: "Close-up of a SADUBAS performer playing tabla", label: "Live detail · Tabla", fit: "contain", ratio: "3 / 2" },
+        { image: "../images/7G5A9991.jpeg", alt: "Close-up of a SADUBAS performer using an electronic controller", label: "Live detail · Electronics", fit: "contain", ratio: "3 / 2" },
+        // { image: "../images/sadubas_ccartwalk2022.png", alt: "SADUBAS Bowers Museum performance poster", label: "Event artwork · Bowers Museum", fit: "contain", ratio: "1 / 1" },
+        // { image: "../images/sadubas_himalayas.png", alt: "Illustrated SADUBAS performance in the Himalayas", label: "Illustrated campaign · Himalayas", fit: "contain", ratio: "1 / 1" },
+        // { image: "../images/sadubas_ccartwalk2023.png", alt: "SADUBAS Culver City Art Walk and Roll Festival poster", label: "Event artwork · Culver City", fit: "contain", ratio: "1 / 1" }
       ],
       performances: [
         { venue: "Academy Museum of Motion Pictures", context: "Los Angeles" },
@@ -1353,19 +1377,15 @@
         { venue: "Great Park Live", context: "Irvine" }
       ],
       partnership: {
-        copy: "We’re looking for a thoughtful global partner who hears the record’s long arc: release strategy, physical editions, editorial storytelling, sync, and a live campaign built around the project’s cinematic world.",
+        copy: "We are seeking a label partner to release and develop Cinematica, along with sync representation for film, television, advertising, and other visual media. We welcome a combined partnership or separate conversations with specialists in each area.",
         points: [
           "Worldwide release and distribution",
-          "Creative marketing with an editorial point of view",
-          "Sync and film / television partnerships",
+          "Sync representation and music supervision",
+          "Marketing and editorial strategy",
           "Physical editions and visual campaign development"
         ]
       },
       downloads: [
-        { title: "Full album", meta: "WAV + MP3 · Private masters", url: "", featured: false },
-        { title: "Album artwork", meta: "Print + digital formats", url: "", featured: false },
-        { title: "Photography", meta: "Hi-res selects + captions", url: "", featured: false },
-        { title: "Credits & lyrics", meta: "PDF · Working metadata", url: "", featured: false },
         { title: "Full Dropbox label kit", meta: "All project materials · Password protected", url: "https://www.dropbox.com/scl/fo/0hajdnuey0iz7rm8irkxd/AJAg_FJBscxwH1QyuEKCn0k?rlkey=sd7th5ljfxw6mx0qewenfiorb&st=qqgg77io&dl=0", featured: true }
       ],
       contact: {
@@ -1401,7 +1421,12 @@
       const item = document.createElement("div");
       item.className = "member";
       const name = document.createElement("h3");
-      name.textContent = member.name;
+      const profile = document.createElement("a");
+      profile.href = member.url;
+      profile.target = "_blank";
+      profile.rel = "noopener noreferrer";
+      profile.textContent = member.name;
+      name.appendChild(profile);
       const role = document.createElement("p");
       role.textContent = member.role;
       item.append(name, role);
@@ -1474,7 +1499,7 @@
         mainPlay.textContent = "▶";
         mainPlay.setAttribute("aria-label", `Play ${track.title}`);
         if (shouldPlay) {
-          playerStatus.textContent = "Private audio placeholder — add this track’s URL in LABEL_DATA to enable playback.";
+          playerStatus.textContent = "Private audio placeholder. Add this track’s URL in LABEL_DATA to enable playback.";
         } else {
           playerStatus.textContent = "Select a track to begin.";
         }
@@ -1494,7 +1519,7 @@
     mainPlay.addEventListener("click", () => {
       const track = LABEL_DATA.tracks[selectedTrack];
       if (!track.src) {
-        playerStatus.textContent = "Private audio placeholder — add this track’s URL in LABEL_DATA to enable playback.";
+        playerStatus.textContent = "Private audio placeholder. Add this track’s URL in LABEL_DATA to enable playback.";
         return;
       }
       if (audio.paused) audio.play();
@@ -1537,7 +1562,7 @@
     $("#videoPlay").addEventListener("click", () => {
       const iframe = document.createElement("iframe");
       iframe.src = video.embed;
-      iframe.title = `${video.title} — ${video.venue}`;
+      iframe.title = `${video.title}: ${video.venue}`;
       iframe.loading = "lazy";
       iframe.referrerPolicy = "strict-origin-when-cross-origin";
       iframe.allow = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
@@ -1549,15 +1574,20 @@
     LABEL_DATA.gallery.forEach(item => {
       const figure = document.createElement("figure");
       figure.className = "gallery-item reveal";
+      if (item.fit === "contain") {
+        figure.classList.add("no-crop");
+        figure.style.aspectRatio = "auto";
+      }
+      const media = document.createElement("div");
+      media.className = "gallery-media";
+      if (item.ratio) media.style.aspectRatio = item.ratio;
       const image = document.createElement("img");
       image.src = item.image;
       image.alt = item.alt;
       image.loading = "lazy";
       image.decoding = "async";
-      const caption = document.createElement("figcaption");
-      caption.className = "gallery-label";
-      caption.textContent = item.label;
-      figure.append(image, caption);
+      media.appendChild(image);
+      figure.appendChild(media);
       $("#gallery").appendChild(figure);
     });
 
@@ -1608,7 +1638,7 @@
       link.addEventListener("click", event => {
         if (!download.url) {
           event.preventDefault();
-          $("#downloadStatus").textContent = `${download.title}: private download URL placeholder — add the final link in LABEL_DATA.`;
+          $("#downloadStatus").textContent = `${download.title}: private download URL placeholder. Add the final link in LABEL_DATA.`;
         }
       });
       $("#downloadList").appendChild(link);
