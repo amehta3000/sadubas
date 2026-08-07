@@ -576,6 +576,13 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    .track-feat {
+      margin-left: 0.5rem;
+      color: var(--cream-dim);
+      font-size: 0.72em;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
 
     .priority {
       padding: 0.28rem 0.5rem;
@@ -618,6 +625,51 @@
       font-size: clamp(1.6rem, 3.4vw, 2.65rem);
       font-style: italic;
       line-height: 1.35;
+    }
+
+    /* ============================================================
+       CREDITS
+    ============================================================ */
+    .credits-block {
+      margin-top: clamp(3rem, 6vw, 5rem);
+      padding-top: clamp(2.5rem, 5vw, 4rem);
+      border-top: 1px solid var(--line);
+    }
+    .credits-lead {
+      color: var(--cream-soft);
+      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+      line-height: 1.7;
+      max-width: 52ch;
+      margin-bottom: 2rem;
+    }
+    .credits-lead strong { color: var(--cream); }
+    .credits-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .credits-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .credits-list dt {
+      color: var(--cream);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .credits-list dd {
+      color: var(--cream-dim);
+      font-size: 0.9rem;
+      text-transform: lowercase;
+    }
+    .credits-footer {
+      color: var(--cream-dim);
+      font-size: 0.9rem;
+      line-height: 1.7;
     }
 
     /* ============================================================
@@ -1177,6 +1229,24 @@
             <div id="albumStory"></div>
           </div>
         </div>
+
+        <div class="credits-block reveal" id="credits">
+          <p class="credits-lead">Produced in part by <strong>Bardo Martinez</strong> (Stones Throw artist; Chicano Batman), the album features live instrumentalists spanning rock, jazz, and Indian classical music.</p>
+          <dl class="credits-list">
+            <div><dt>Matt Battle</dt><dd>drums</dd></div>
+            <div><dt>Kyle P. Davis</dt><dd>keys</dd></div>
+            <div><dt>Ameet Mehta</dt><dd>synths</dd></div>
+            <div><dt>Robin Sukhadia</dt><dd>tabla</dd></div>
+            <div><dt>Bardo Martinez</dt><dd>guitar</dd></div>
+            <div><dt>Jyoni Rivera</dt><dd>bass</dd></div>
+            <div><dt>Clinton Patterson</dt><dd>horns</dd></div>
+            <div><dt>Rajib Karmakar</dt><dd>sitar</dd></div>
+            <div><dt>Sheela Bringi</dt><dd>bansuri</dd></div>
+            <div><dt>Anand Subramanium</dt><dd>harmonium</dd></div>
+            <div><dt>Rajen Sukhadia</dt><dd>vocals</dd></div>
+          </dl>
+          <p class="credits-footer">All songs written, composed, and arranged by Sadubas (Ameet Mehta &amp; Robin Sukhadia)<br>Mixed and mastered by Collin Davis</p>
+        </div>
       </div>
     </section>
 
@@ -1317,15 +1387,15 @@
       },
       tracks: [
         { title: "DISTANCE", duration: "1:57", src: "/label/audio/01-distance.mp3", priority: "" },
-        { title: "AMANI", duration: "4:34", src: "/label/audio/02-amani.mp3", priority: "Priority track" },
-        { title: "CIRCULAR MOMENTUM", duration: "2:46", src: "/label/audio/03-circular-momentum.mp3", priority: "" },
-        { title: "MERE DIL", duration: "3:11", src: "/label/audio/04-mere-dil.mp3", priority: "Priority track" },
+        { title: "AMANI", feat: "Sheela Bringi", duration: "4:34", src: "/label/audio/02-amani.mp3", priority: "Priority track" },
+        { title: "CIRCULAR MOMENTUM", feat: "Neela Banerjee", duration: "2:46", src: "/label/audio/03-circular-momentum.mp3", priority: "" },
+        { title: "MERE DIL", feat: "Sakshi Chopra", duration: "3:11", src: "/label/audio/04-mere-dil.mp3", priority: "Priority track" },
         { title: "DANCE WITH ME", duration: "2:51", src: "/label/audio/05-dance-with-me.mp3", priority: "" },
-        { title: "YE CONTRACT", duration: "3:05", src: "/label/audio/06-ye-contract.mp3", priority: "Priority track" },
-        { title: "SAAF KARO", duration: "3:09", src: "/label/audio/07-saaf-karo.mp3", priority: "" },
+        { title: "YE CONTRACT", duration: "3:05", src: "/label/audio/06-ye-contract.mp3", priority: "" },
+        { title: "SAAF KARO", feat: "Clinton Patterson", duration: "3:09", src: "/label/audio/07-saaf-karo.mp3", priority: "Priority track" },
         { title: "DESTROYER", duration: "3:08", src: "/label/audio/08-destroyer.mp3", priority: "" },
         { title: "KAILASH", duration: "2:40", src: "/label/audio/09-kailash.mp3", priority: "" },
-        { title: "JAI JAI", duration: "5:04", src: "/label/audio/10-jai-jai.mp3", priority: "" }
+        { title: "JAI JAI", feat: "Rajen Sukhadia", duration: "5:04", src: "/label/audio/10-jai-jai.mp3", priority: "" }
       ],
       video: {
         title: "Amani: Live at the Bowers Museum",
@@ -1463,6 +1533,12 @@
       number.className = "track-number";
       number.textContent = String(index + 1).padStart(2, "0");
       title.append(number, document.createTextNode(track.title));
+      if (track.feat) {
+        const feat = document.createElement("span");
+        feat.className = "track-feat";
+        feat.textContent = `feat. ${track.feat}`;
+        title.appendChild(feat);
+      }
 
       const priority = document.createElement("span");
       priority.className = "priority";
