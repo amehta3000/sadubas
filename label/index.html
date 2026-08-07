@@ -481,6 +481,20 @@
       margin-top: 0.65rem;
     }
 
+    .transport-btn {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      color: var(--cream-dim);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .transport-btn:hover { color: var(--gold-light); }
+    .transport-btn.mute { font-size: 0.9rem; }
+
     .icon-button,
     .track-button {
       border: 0;
@@ -512,34 +526,24 @@
     }
 
     .now-time {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
       color: var(--cream-dim);
       font-size: 0.72rem;
       font-variant-numeric: tabular-nums;
     }
 
-    .progress {
-      width: 100%;
-      height: 4px;
-      display: block;
-      margin-top: 1rem;
-      accent-color: var(--gold);
-      cursor: pointer;
-    }
-
-    .volume-row {
+    .progress-row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
+      gap: 0.75rem;
+      margin-top: 1rem;
     }
-    .volume-icon {
-      font-size: 0.85rem;
-      cursor: pointer;
-      user-select: none;
-    }
-    .volume {
-      width: 90px;
-      height: 3px;
+    .progress {
+      flex: 1;
+      height: 4px;
+      display: block;
       accent-color: var(--gold);
       cursor: pointer;
     }
@@ -779,7 +783,13 @@
       width: 100%;
       object-fit: cover;
       object-position: center 20%;
-      filter: saturate(0.85) contrast(1.18);
+      filter: saturate(0.75) contrast(1.22) sepia(0.15) brightness(0.95);
+      mask-image: linear-gradient(to bottom, black 65%, transparent),
+                  linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      mask-composite: intersect;
+      -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent),
+                          linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-composite: source-in;
     }
 
     .artist-copy p {
@@ -1225,12 +1235,15 @@
               <div class="now-row">
                 <button class="icon-button main-play" id="mainPlay" type="button" aria-label="Play selected track">▶</button>
                 <div class="now-title" id="nowTitle">Track title</div>
-                <div class="now-time"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>
+                <div class="now-time">
+                  <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+                  <button class="transport-btn mute" id="muteBtn" type="button" aria-label="Mute">🔊</button>
+                </div>
               </div>
-              <input class="progress" id="progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Track progress">
-              <div class="volume-row">
-                <span class="volume-icon" id="volumeIcon" title="Mute">🔊</span>
-                <input class="volume" id="volume" type="range" min="0" max="100" value="80" step="1" aria-label="Volume">
+              <div class="progress-row">
+                <input class="progress" id="progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Track progress">
+                <button class="transport-btn" id="prevTrack" type="button" aria-label="Previous track">⏮</button>
+                <button class="transport-btn" id="nextTrack" type="button" aria-label="Next track">⏭</button>
               </div>
               <p class="player-status" id="playerStatus" role="status" aria-live="polite"></p>
             </div>
@@ -1650,17 +1663,17 @@
       if (Number.isFinite(audio.duration)) audio.currentTime = (progress.value / 100) * audio.duration;
     });
 
-    const volumeSlider = $("#volume");
-    const volumeIcon = $("#volumeIcon");
-    audio.volume = volumeSlider.value / 100;
-    volumeSlider.addEventListener("input", () => {
-      audio.volume = volumeSlider.value / 100;
-      audio.muted = false;
-      volumeIcon.textContent = audio.volume === 0 ? "🔇" : audio.volume < 0.5 ? "🔉" : "🔊";
-    });
-    volumeIcon.addEventListener("click", () => {
+    const muteBtn = $("#muteBtn");
+    muteBtn.addEventListener("click", () => {
       audio.muted = !audio.muted;
-      volumeIcon.textContent = audio.muted ? "🔇" : audio.volume < 0.5 ? "🔉" : "🔊";
+      muteBtn.textContent = audio.muted ? "🔇" : "🔊";
+    });
+
+    $("#prevTrack").addEventListener("click", () => {
+      if (selectedTrack > 0) selectTrack(selectedTrack - 1, !audio.paused);
+    });
+    $("#nextTrack").addEventListener("click", () => {
+      if (selectedTrack < LABEL_DATA.tracks.length - 1) selectTrack(selectedTrack + 1, !audio.paused);
     });
 
     selectTrack(0);
