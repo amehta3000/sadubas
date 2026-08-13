@@ -517,14 +517,20 @@
       border-bottom-color: var(--gold);
     }
 
-    /* SVG Mandala / Medallion */
-    .medallion {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* About photo — matches the duo photo treatment on the label page */
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: saturate(0.75) contrast(1.22) sepia(0.15) brightness(0.95);
+      mask-image: linear-gradient(to bottom, black 65%, transparent),
+                  linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      mask-composite: intersect;
+      -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent),
+                          linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-composite: source-in;
     }
-
-    .medallion svg { width: 100%; max-width: 380px; }
 
     /* ============================================================
        VIDEOS
@@ -1032,7 +1038,6 @@
     ============================================================ */
     @media (max-width: 768px) {
       .about-grid { grid-template-columns: 1fr; }
-      .medallion { display: none; }
       section { padding: 5rem 1.5rem; }
     }
 
@@ -1165,39 +1170,11 @@
         </div>
       </div>
 
-      <!-- SVG Medallion -->
-      <div class="medallion reveal d3" aria-hidden="true">
-        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Outer rings -->
-          <circle cx="200" cy="200" r="190" stroke="#D4940A" stroke-width="0.5" stroke-dasharray="3 9" opacity="0.4"/>
-          <circle cx="200" cy="200" r="165" stroke="#B5271A" stroke-width="0.5" stroke-dasharray="2 7" opacity="0.3"/>
-          <circle cx="200" cy="200" r="140" stroke="#D4940A" stroke-width="1" opacity="0.15"/>
-          <circle cx="200" cy="200" r="115" stroke="#D4940A" stroke-width="0.5" opacity="0.2"/>
-          <!-- Axis lines -->
-          <line x1="200" y1="10" x2="200" y2="390" stroke="#D4940A" stroke-width="0.4" opacity="0.15"/>
-          <line x1="10" y1="200" x2="390" y2="200" stroke="#D4940A" stroke-width="0.4" opacity="0.15"/>
-          <line x1="66" y1="66" x2="334" y2="334" stroke="#D4940A" stroke-width="0.4" opacity="0.15"/>
-          <line x1="334" y1="66" x2="66" y2="334" stroke="#D4940A" stroke-width="0.4" opacity="0.15"/>
-          <!-- Cardinal dots -->
-          <circle cx="200" cy="10" r="4" fill="#D4940A" opacity="0.6"/>
-          <circle cx="200" cy="390" r="4" fill="#D4940A" opacity="0.6"/>
-          <circle cx="10" cy="200" r="4" fill="#D4940A" opacity="0.6"/>
-          <circle cx="390" cy="200" r="4" fill="#D4940A" opacity="0.6"/>
-          <circle cx="66" cy="66" r="3" fill="#B5271A" opacity="0.6"/>
-          <circle cx="334" cy="334" r="3" fill="#B5271A" opacity="0.6"/>
-          <circle cx="334" cy="66" r="3" fill="#B5271A" opacity="0.6"/>
-          <circle cx="66" cy="334" r="3" fill="#B5271A" opacity="0.6"/>
-          <!-- Inner petals (lotus-like) -->
-          <path d="M200 85 C220 130 220 170 200 200 C180 170 180 130 200 85Z" fill="#D4940A" opacity="0.06"/>
-          <path d="M315 200 C270 220 230 220 200 200 C230 180 270 180 315 200Z" fill="#D4940A" opacity="0.06"/>
-          <path d="M200 315 C180 270 180 230 200 200 C220 230 220 270 200 315Z" fill="#D4940A" opacity="0.06"/>
-          <path d="M85 200 C130 180 170 180 200 200 C170 220 130 220 85 200Z" fill="#D4940A" opacity="0.06"/>
-          <!-- Center text -->
-          <text x="200" y="190" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="52" fill="#D4940A" opacity="0.9" letter-spacing="4">SADU</text>
-          <text x="200" y="234" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="52" fill="#B5271A" opacity="0.9" letter-spacing="4">BAS</text>
-          <text x="200" y="260" text-anchor="middle" font-family="'Rajdhani', sans-serif" font-size="10" fill="#9a8a68" letter-spacing="6" font-weight="700">THE SADHUS OF BASS</text>
-        </svg>
-      </div>
+      <!-- Duo photo -->
+      <img class="about-photo reveal d3"
+           src="https://media.sadubas.com/sadubas-headshot-950cfa82.webp"
+           alt="Ameet Mehta and Robin Sukhadia of SADUBAS standing together outdoors"
+           loading="lazy" decoding="async">
 
     </div>
   </div>
